@@ -1,0 +1,115 @@
+---
+
+title: ArrayList
+date: 2021-05-26
+
+---
+
+# [ 객체 배열 클래스 ArryList] 
+### > 장점
+* 배열의 길이와 상관없이 객체를 추가 할 수 있다.
+* 배열의 중간 값이 제어되었을 때, 그 다음 요소값을 하나씩 앞으로 이동하는 코드가 이미 구현되어 있다.
+
+### > 기본 형식
+* ArrayList<E> 배열 이름 = new ArrayList<E>(); //E는 객체의 자료형
+  
+### > ArrayList 클래스의 주요 메서드
+* boolean add(E e) - 요소 하나르 배열에 추가
+* int size() - 배열에 추가된 요소 전체 개수르 반환
+* E get(int index) - 배열의 index위치에 있는 요소 값을 반환
+* E remove(int index) - 배열의 index 위치에 있는 요소 값을 제거하고 그 값을 반환
+* boolean isEmpty() - 배열이 비어 있는지 확인 
+
+### > 07 - 4 배열 응용 프로그램 p226
+[Student 클래스]
+
+```java
+package arrayList;
+
+import java.util.ArrayList;
+
+public class Student {
+	int studentId;
+	String studentName;
+	ArrayList<Subject> subjectList;
+
+	public Student(int studentId, String studentName) {
+		this.studentId = studentId;
+		this.studentName = studentName;
+		subjectList = new ArrayList<Subject>(); // 학생인스턴스가 생성 될 때 마다 ArrayList클래스도 함께 만들어줌.
+
+	}
+
+	public void addSubject(String name, int score) { // 과목이 생길 때마다 subjectList에 추가해주는 메소드.
+		Subject subject = new Subject(); // 먼저 여러 과목을 위해 Subject 인스턴스를 생성해준다.
+		subject.setSubjectName(name); // 생성된 인스턴스에 과목의 이름과 성적을 입력해주는 메소드 .
+		subject.setScorePoint(score);
+		subjectList.add(subject); // subjectList에 과목이 생성될 때마다 추가해주는 ArrayList클래스의 메소드 p222 참고.
+	}
+
+	public void showStudentinfo() {// 배열요소 출력 + 총점 출력하는 메소드 만들기.
+		int total = 0;
+		for (Subject sub : subjectList) { // 향상된 for문과 배열 p218 참고
+			// (int i = 0; i < subjectList.size; i++) 위와 같은 문장이다 여기서 길이를 legth를 사용하지 않고
+			// size를 사용한 것은 subjectList가 ArrayList클래스를 사용했기 때문이고, ArrayList클래스의 배열 전체개수
+			// 반환메소드가 size이기 때문이다.
+			total = total + sub.getScorePoint();
+			System.out.println(
+					"학생" + studentName + "의 " + sub.getSubjectName() + "과목의 성적은 " + sub.getScorePoint() + "입니다.");
+		}
+		System.out.println("학생" + studentName + "의 총점" + total + "입니다.");
+	}
+}
+```
+
+[Student 클래스]
+
+```java
+package arrayList;
+
+public class Subject {
+
+	String subjectName;
+	int scorePoint;
+
+	public String getSubjectName() {
+		return subjectName;
+	}
+
+	public void setSubjectName(String subjectName) {
+		this.subjectName = subjectName;
+	}
+
+	public int getScorePoint() {
+		return scorePoint;
+	}
+
+	public void setScorePoint(int scorePoint) {
+		this.scorePoint = scorePoint;
+	}
+
+}
+```
+
+[StudentTest 클래스]
+
+```java
+package arrayList;
+
+public class StudentTest {
+
+	public static void main(String[] args) {
+		Student student1 = new Student(1001, "김아영");
+		student1.addSubject("국어", 100);
+		student1.addSubject("수학", 100);
+		student1.addSubject("영어", 100);
+
+		Student student2 = new Student(1002, "김효영");
+		student2.addSubject("사회", 50);
+		student2.addSubject("과학", 50);
+
+		student1.showStudentinfo();
+		student2.showStudentinfo();
+	}
+}
+```
