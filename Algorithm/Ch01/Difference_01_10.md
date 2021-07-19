@@ -58,3 +58,31 @@ public class Difference_01_10 {
 	}
 }
 ```
+
+[답지 풀이]
+```java
+package chap01;
+import java.util.Scanner;
+// 정수 b에서 정수 a를 뺀 값을 구합니다(b > a가 되도록 입력 받음)
+
+class Difference_01_10 {
+	public static void main(String[] args) {
+		Scanner stdIn = new Scanner(System.in);
+
+		System.out.print("a의 값：");
+		int a = stdIn.nextInt();
+
+		int b=0;
+		while (true) {
+			System.out.print("b의 값：");
+			b = stdIn.nextInt();
+			if (b > a)
+				break;	//b가 a 보다 큰 조건이 성립하면 반복문을 멈추고 반복문을 나간다
+			//if 조건이 성립되지 않으면 그 다음문장인 밑에 줄부터 계속 반복해준다.
+			System.out.println("a보다 큰 값을 입력하세요!");
+		}
+		//반복문을 나온 후 입력받는 a, b로 값을 구한다
+		System.out.println("b - a는 " + (b - a) + "입니다.");
+	}
+}
+```
